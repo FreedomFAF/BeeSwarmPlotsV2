@@ -1,0 +1,10 @@
+
+build/
+dist/
+ScreenShots/
+Scripts/
+Lib/
+pyvenv.cfg
+main.spec
+*.pyc
+*.pyo
