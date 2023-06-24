@@ -131,6 +131,12 @@ class Screen(object):
                 pygame.image.save(self.screen, spriteName)
                 self.pdf.add_page()
                 self.pdf.image(spriteName)
+            else:
+                spriteName = os.path.join(self.screenShotFolder, "TeacherVersion.png")
+                pygame.image.save(self.screen, spriteName)
+                self.pdf.add_page()
+                self.pdf.image(spriteName)
+
             self.screenShotCount += 1
 
             if self.screenShotCount == len(self.dataStore.selectedStudents) + 1:
