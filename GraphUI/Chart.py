@@ -64,16 +64,28 @@ class Chart(object):
         self.legendDefaultY = copy.deepcopy(self.legendY)
         self.legendXMax = self.legendX
 
+        coloursAssigned = {}
+        startColourNumber = 4
+
         for a in range(len(dataList)):
             dataRow = dataList.iloc[a]
             score = dataRow[chartName]
             xPos =  int(self.pointXPos(len(self.scores[score])) * ((self.pointSize + self.pointSpacing) * 2) + self.middleX)
             yPos = self.bottomY + score*stepSize
+            location = [xPos, yPos]
 
             student = dataRow[self.dataStore.studentColumn]
-
-            location = [xPos, yPos]
-            newPoint = Point(student, chartName, score, location, self.pointSize)
+            if self.dataStore.classColumn != "":
+                studentsClass = dataRow[self.dataStore.classColumn]
+                if studentsClass in coloursAssigned.keys():
+                    studentsColour = coloursAssigned.get(studentsClass)
+                else:
+                    studentsColour = Colour.get(startColourNumber)
+                    coloursAssigned[studentsClass] = studentsColour
+                    startColourNumber += 1
+                newPoint = Point(student, chartName, score, location, self.pointSize, studentsColour)
+            else:
+                newPoint = Point(student, chartName, score, location, self.pointSize)
             self.points[student] = newPoint
             self.scores[score].append(newPoint)
 

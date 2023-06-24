@@ -34,10 +34,17 @@ class DataSelectorPage(BasePage):
         ssLabel = tk.Label(self, text="Select the column of Student Names:")
         ssLabel.grid(row=currentRow, column=0, sticky=tk.W, pady=6)
 
-        studentColumnChoices = self.dataStore.data.columns
+        studentColumnChoices = self.dataStore.data.columns.tolist()
+        studentColumnChoices.append("")
         studentColumnOptionMenu = tk.OptionMenu(self, self.studentColumn, *studentColumnChoices)
         studentColumnOptionMenu.grid(row=currentRow, column=1, sticky=tk.W, pady=6)
+        currentRow += 1
 
+        ssLabel = tk.Label(self, text="Select the Class column:")
+        ssLabel.grid(row=currentRow, column=0, sticky=tk.W, pady=6)
+
+        studentColumnOptionMenu = tk.OptionMenu(self, self.classColumn, *studentColumnChoices)
+        studentColumnOptionMenu.grid(row=currentRow, column=1, sticky=tk.W, pady=6)
         currentRow += 1
 
         outOfRowWarning = tk.Label(self, text="Please note the first row will be used as the Maximum score for each question", wraplength=200)
@@ -55,6 +62,7 @@ class DataSelectorPage(BasePage):
 
     def goToStudentSelector(self):
         self.dataStore.studentColumn = self.studentColumn.get()
+        self.dataStore.classColumn = self.classColumn.get()
         columnsToUse = []
         for k, v in self.headerIncludes.items():
             if v.get() == 1:

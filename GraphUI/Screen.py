@@ -50,6 +50,8 @@ class Screen(object):
 
             chartLocation = [chartX*chartSize[0],chartY*chartSize[1]]
             chartColumns = [chartName, self.dataStore.studentColumn]
+            if self.dataStore.classColumn != "":
+                chartColumns.append(self.dataStore.classColumn)
             chartData = self.dataStore.finalData[chartColumns]
             chartMax = self.dataStore.outOfRow[chartName]
             self.UI[chartName] = Chart(chartName, chartData, chartMax, chartSize, chartLocation)

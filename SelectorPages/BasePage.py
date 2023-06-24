@@ -12,3 +12,6 @@ class BasePage(tk.Frame):
 
         self.studentColumn = tk.StringVar()
         self.studentColumn.set(self.dataStore.studentColumn)
+
+        self.classColumn = tk.StringVar()
+        self.classColumn.set(self.dataStore.classColumn)

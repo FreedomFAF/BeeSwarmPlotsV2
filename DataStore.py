@@ -1,5 +1,6 @@
 import pandas as pd
 import copy
+from GraphUI.Colour import Colour
 
 class DataStore(object):
     instance = False
@@ -17,6 +18,7 @@ class DataStore(object):
         self.finalData = None
 
         self.studentColumn = ""
+        self.classColumn = ""
         self.chartsNeeded = []
 
         self.selectedColumns = []
@@ -35,3 +37,5 @@ class DataStore(object):
         self.finalData = self.data.loc[self.selectedStudents, self.selectedColumns]
         self.chartsNeeded = copy.deepcopy(self.selectedColumns)
         self.chartsNeeded.remove(self.studentColumn)
+        if self.classColumn != "":
+            self.chartsNeeded.remove(self.classColumn)
